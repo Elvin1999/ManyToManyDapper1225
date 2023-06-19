@@ -1,0 +1,30 @@
+﻿
+
+CREATE DATABASE OneToManyDB
+GO
+USE OneToManyDB
+GO
+
+CREATE TABLE Groups(
+GroupId INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
+Title NVARCHAR(30) NOT NULL
+)
+GO
+INSERT INTO Groups(Title)
+VALUES('1225_az'),('3212_az')
+GO
+
+CREATE TABLE Students(
+StudentId INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
+Firstname NVARCHAR(30) NOT NULL,
+Age INT NOT NULL,
+GroupId INT FOREIGN KEY REFERENCES Groups(GroupId)
+)
+GO
+INSERT INTO Students([Firstname],[Age],[GroupId])
+VALUES('Allahyar',25,1),
+('Vusal',29,1),('Huseyn',18,2),('Ali',20,2)
+
+SELECT * FROM Students AS S
+INNER JOIN Groups AS G
+ON S.GroupId=G.GroupId
